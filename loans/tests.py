@@ -6,18 +6,13 @@ Replace these with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.db import IntegrityError
+from nose.tools import *
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+class BookTest(TestCase):
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
+    def test_model_validation_title_author(self):
+        from models import Book
+        b = Book(title = None, author = None)
+        assert_raises(IntegrityError, b.save)
 
