@@ -6,4 +6,4 @@ Feature: List of books
   Scenario: List all books
     Given there are 20 books in the system
     When I navigate to the books list page
-    Then I should see the 20 books titles
+    Then I should see the title of the 20 books
