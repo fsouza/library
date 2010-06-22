@@ -1,6 +1,5 @@
-from freshen import *
 from loans.models import Book
-
+from freshen import *
 from django.test.client import Client
 
 @Given('there are (\d+) books in the system')
@@ -16,4 +15,11 @@ def create_books(total_of_books):
 @When('I navigate to the books list page')
 def navigate_to_books_list():
     client = Client()
-    scc.response = client.get('/loan/books')
+    scc.response = client.get('/loans/books')
+
+@Then('I should see the title of the (\d+) books')
+def check_presence_of_the_title_of_books(total_of_books):
+    expected_string = ''
+    for book in scc.books:
+        expected_string = '<li>%s</li>' % book.title
+    assert_true(expected_string in scc.response.content)
