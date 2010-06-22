@@ -1,3 +1,4 @@
+from loans.models import Book
 from freshen import *
 from django.test.client import Client
 
